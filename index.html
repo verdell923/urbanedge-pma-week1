@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>UrbanEdge Apparel Co. – Process Modeling &amp; Analysis</title>
+    <style>
+        body { 
+            margin: 0; 
+            font-family: Arial, Helvetica, sans-serif; 
+            background: #f4f5f7; 
+            color: #222; 
+        }
+        header {
+            background: linear-gradient(135deg, #1f3c88, #4e87d4);
+            color: #fff;
+            padding: 20px 40px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        }
+        header h1 {
+            margin: 0;
+            font-size: 26px;
+            letter-spacing: 0.05em;
+        }
+        nav {
+            margin-top: 10px;
+        }
+        nav a {
+            color: #f4f5f7;
+            margin-right: 20px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            display: flex;
+            min-height: calc(100vh - 80px);
+        }
+        .sidebar {
+            width: 220px;
+            background: #ffffff;
+            border-right: 1px solid #dde1e7;
+            padding: 20px;
+        }
+        .sidebar h3 {
+            margin-top: 0;
+            font-size: 16px;
+            color: #1f3c88;
+        }
+        .sidebar a {
+            display: block;
+            margin: 8px 0;
+            color: #333;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .sidebar a:hover {
+            color: #1f3c88;
+        }
+        .content {
+            flex: 1;
+            padding: 30px 40px;
+        }
+        section {
+            margin-bottom: 50px;
+            background: #ffffff;
+            padding: 25px 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        section h2 {
+            margin-top: 0;
+            color: #1f3c88;
+        }
+        .flow-list {
+            margin-left: 20px;
+        }
+        .flow-list li {
+            margin: 4px 0;
+        }
+        .image-row {
+            display: flex;
+            gap: 20px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+        .image-card {
+            background: #f9fafc;
+            border-radius: 6px;
+            padding: 10px;
+            flex: 1 1 220px;
+            text-align: center;
+            border: 1px solid #e1e4ec;
+        }
+        .image-card img {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 10px;
+        }
+        table, th, td {
+            border: 1px solid #d0d4dd;
+        }
+        th, td {
+            padding: 8px 10px;
+            text-align: left;
+            font-size: 14px;
+        }
+        th {
+            background: #f0f2f8;
+        }
+        .note {
+            font-size: 12px;
+            color: #555;
+            margin-top: 5px;
+        }
+        .references p {
+            font-size: 14px;
+            margin: 6px 0;
+        }
+        .powerbi-embed {
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 6px;
+            border: 1px dashed #4e87d4;
+            background: #f6f9ff;
+            font-size: 13px;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>UrbanEdge Apparel Co. – Process Modeling &amp; Analysis Portal</h1>
+    <nav>
+        <a href="#introduction">Introduction</a>
+        <a href="#proposed">Proposed Business Model</a>
+        <a href="#references">References</a>
+    </nav>
+</header>
+
+<div class="container">
+    <aside class="sidebar">
+        <h3>Project Sections</h3>
+        <a href="#introduction">Introduction</a>
+        <a href="#introduction-current">Current Process Model</a>
+        <a href="#proposed">Proposed Business Model</a>
+        <a href="#proposed-costs">Cost Analysis</a>
+        <a href="#references">References</a>
+    </aside>
+
+    <main class="content">
+        <section id="introduction">
+            <h2>Introduction</h2>
+            <p>
+                UrbanEdge Apparel Co. is a lifestyle and apparel e-commerce retailer specializing in fast-moving consumer goods 
+                delivered to domestic and international customers. The organization currently relies on a multistep order 
+                fulfillment model that integrates web ordering, inventory allocation, warehouse picking, and external carrier 
+                distribution. While this model supports the existing customer base, several inefficiencies limit throughput, 
+                increase operational costs, and negatively impact the customer experience.
+            </p>
+            <p>
+                The current workflow contains excessive manual interventions, limited automation, inconsistent data synchronization 
+                between the e-commerce platform and the inventory management system, and insufficient demand forecasting. These 
+                issues contribute to delayed order cycles, stockouts, excess inventory, and duplicated work within the warehouse. 
+                The following section outlines the current-state process model and highlights its primary shortcomings.
+            </p>
+        </section>
+
+        <section id="introduction-current">
+            <h2>Current Process Flow – Order Fulfillment Model</h2>
+            <h3>Current Process Flow (10 Entities)</h3>
+            <ol class="flow-list">
+                <li>Customer browses the UrbanEdge Apparel Co. website.</li>
+                <li>Customer places an order through the e-commerce platform.</li>
+                <li>Order details are written to the e-commerce transaction database.</li>
+                <li>Payment is verified through a manual review step for potential risk or fraud.</li>
+                <li>Approved orders are transmitted to the standalone inventory management system.</li>
+                <li>Inventory stock levels are checked and items are reserved.</li>
+                <li>A warehouse pick ticket is generated and printed.</li>
+                <li>Warehouse staff manually locate, pick, and pack ordered items.</li>
+                <li>A carrier pickup is scheduled based on fixed daily pickup times.</li>
+                <li>Orders are shipped and tracking information is sent to the customer via email.</li>
+            </ol>
+            <p>
+                The process exhibits several shortcomings, including manual payment verification, non–real-time inventory updates, 
+                and a heavy reliance on human labor for warehouse navigation and packing. Carrier scheduling is relatively inflexible, 
+                which reduces the ability to respond to volume spikes during promotional campaigns or seasonal peaks.
+            </p>
+
+            <h3>Company and Product Imagery</h3>
+            <div class="image-row">
+                <div class="image-card">
+                    <img src="https://via.placeholder.com/320x200?text=UrbanEdge+Warehouse" alt="UrbanEdge Warehouse">
+                    <p>Illustrative representation of UrbanEdge Apparel Co. warehouse and fulfillment operations.</p>
+                </div>
+                <div class="image-card">
+                    <img src="https://via.placeholder.com/320x200?text=UrbanEdge+Apparel+Line" alt="UrbanEdge Product Line">
+                    <p>Illustrative representation of UrbanEdge Apparel Co. lifestyle apparel product offerings.</p>
+                </div>
+            </div>
+            <p class="note">
+                Note: Replace the placeholder images above with licensed or self-created images that accurately represent the company 
+                and product line.
+            </p>
+        </section>
+
+        <section id="proposed">
+            <h2>Proposed Business Model – Future-State Process</h2>
+            <p>
+                The proposed business model for UrbanEdge Apparel Co. introduces an automated, analytics-driven fulfillment framework. 
+                The redesign leverages cloud-based systems, artificial intelligence, and robotic assistance to streamline the 
+                end-to-end order lifecycle. The objective is to improve throughput, reduce operating costs, and enhance the 
+                customer experience by providing faster and more reliable fulfillment.
+            </p>
+            <p>
+                The future-state model replaces manual verification and fragmented systems with automated fraud screening, 
+                unified real-time inventory management, and intelligent carrier optimization. Warehouse operations are augmented 
+                by robotic assistants and automated packing stations to reduce human handling time and decrease error rates.
+            </p>
+
+            <h3>Proposed Process Flow (10 Entities)</h3>
+            <ol class="flow-list">
+                <li>Customer browses a personalized, AI-driven UrbanEdge Apparel Co. storefront.</li>
+                <li>Customer places an order through the enhanced e-commerce platform.</li>
+                <li>An automated payment gateway performs fraud and risk screening in real time.</li>
+                <li>Approved orders are transmitted to a unified cloud-based inventory management system.</li>
+                <li>Real-time stock allocation reserves the required items across all fulfillment centers.</li>
+                <li>Robotic warehouse assistants retrieve the reserved items from storage locations.</li>
+                <li>An automated packing station prepares parcels and generates shipping labels.</li>
+                <li>An AI optimization engine selects the most cost-effective and timely carrier.</li>
+                <li>Dynamic carrier pickup scheduling adjusts to demand and capacity constraints.</li>
+                <li>Customers receive real-time tracking updates and predictive delivery notifications.</li>
+            </ol>
+            <p>
+                This future-state workflow provides substantial advantages, including reduced manual labor, improved stock accuracy, 
+                and lower shipping costs. Automation also decreases processing time between order placement and shipment, which is 
+                expected to improve customer satisfaction and retention.
+            </p>
+
+            <div class="powerbi-embed">
+                <strong>Power BI Placeholder:</strong><br>
+                An embedded Power BI report can be placed here to visualize the proposed process model, 
+                including a flow diagram or Sankey diagram representing the new order fulfillment path.<br><br>
+                Replace this block with an actual Power BI embed code or link once the report is published.
+            </div>
+        </section>
+
+        <section id="proposed-costs">
+            <h2>Cost Analysis of the Proposed Model</h2>
+            <p>
+                The financial comparison between the current and future-state fulfillment models indicates a significant reduction 
+                in annual operating expenses for UrbanEdge Apparel Co. Automation of payment verification, warehouse operations, 
+                and carrier optimization contributes directly to cost savings while supporting higher order volumes.
+            </p>
+
+            <h3>Current Operating Costs (Annualized)</h3>
+            <table>
+                <tr>
+                    <th>Cost Category</th>
+                    <th>Current Cost (USD)</th>
+                </tr>
+                <tr>
+                    <td>Manual labor (warehouse operations)</td>
+                    <td>1,280,000</td>
+                </tr>
+                <tr>
+                    <td>Payment review team</td>
+                    <td>320,000</td>
+                </tr>
+                <tr>
+                    <td>Inventory system maintenance (on-premise)</td>
+                    <td>150,000</td>
+                </tr>
+                <tr>
+                    <td>Carrier shipping costs</td>
+                    <td>2,400,000</td>
+                </tr>
+                <tr>
+                    <td>Order error returns</td>
+                    <td>500,000</td>
+                </tr>
+                <tr>
+                    <th>Total current costs</th>
+                    <th>4,650,000</th>
+                </tr>
+            </table>
+
+            <h3>Future Operating Costs (Annualized)</h3>
+            <table>
+                <tr>
+                    <th>Cost Category</th>
+                    <th>Future Cost (USD)</th>
+                </tr>
+                <tr>
+                    <td>Automated warehouse robotics</td>
+                    <td>750,000</td>
+                </tr>
+                <tr>
+                    <td>AI fraud screening system (SaaS)</td>
+                    <td>120,000</td>
+                </tr>
+                <tr>
+                    <td>Cloud inventory platform</td>
+                    <td>300,000</td>
+                </tr>
+                <tr>
+                    <td>Optimized carrier shipping costs</td>
+                    <td>1,920,000</td>
+                </tr>
+                <tr>
+                    <td>Order error returns</td>
+                    <td>200,000</td>
+                </tr>
+                <tr>
+                    <th>Total future costs</th>
+                    <th>3,290,000</th>
+                </tr>
+            </table>
+
+            <p>
+                The projected annual savings from the proposed model are 1,360,000 USD, representing approximately a 29.2 percent 
+                reduction in operating expenses. These savings are primarily driven by reductions in manual labor, order error rates, 
+                and carrier costs, as well as efficiencies gained through integrated cloud services.
+            </p>
+
+            <div class="powerbi-embed">
+                <strong>Power BI Placeholder:</strong><br>
+                A Power BI dashboard should be embedded or linked here to present side-by-side comparisons of current and future costs, 
+                including bar charts, KPI cards, and a five-year savings projection. Use the Excel cost analysis file as the data source 
+                for the report.
+            </div>
+        </section>
+
+        <section id="references" class="references">
+            <h2>References</h2>
+            <p>Coyle, J. J., Langley, C. J., Novack, R. A., &amp; Gibson, B. J. (2021). <em>Supply chain management: A logistics perspective</em> (11th ed.). Cengage Learning.</p>
+            <p>Frazelle, E. H. (2019). <em>World-class warehousing and material handling</em> (2nd ed.). McGraw-Hill.</p>
+            <p>Hugos, M. H. (2018). <em>Essentials of supply chain management</em> (4th ed.). Wiley.</p>
+            <p>Kembro, J., &amp; Näslund, D. (2019). Information sharing in supply chains: A systematic literature review. <em>International Journal of Physical Distribution &amp; Logistics Management, 49</em>(1), 44–72.</p>
+            <p>Mell, P., &amp; Grance, T. (2011). <em>The NIST definition of cloud computing</em> (NIST Special Publication 800-145). U.S. Department of Commerce.</p>
+        </section>
+    </main>
+</div>
+
+</body>
+</html>
